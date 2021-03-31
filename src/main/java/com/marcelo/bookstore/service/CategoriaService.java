@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.marcelo.bookstore.domain.Categoria;
 import com.marcelo.bookstore.repositories.CategoriaRepository;
 import com.marcelo.bookstore.service.exceptions.ObjectNotFoundException;
+import com.marcelo.bookstore.tdos.CategoriaDTO;
 
 @Service
 public class CategoriaService {
@@ -29,6 +30,13 @@ public class CategoriaService {
 	
 	public Categoria create(Categoria obj) {
 		obj.setId(null);
+		return repository.save(obj);
+	}
+
+	public Categoria update(Integer id, CategoriaDTO objDto) {
+		Categoria obj = findById(id);
+		obj.setNome(objDto.getNome());
+		obj.setDescricao(objDto.getDescricao());
 		return repository.save(obj);
 	}
 
